@@ -14,8 +14,47 @@ const combinations = [
 ]
 
 let clicks = 0
-
+let gameEnd = false
+let player = 'human'
 let currShape = 'X'
+
+cells.forEach((cell) => {
+    cell.addEventListener('click', () => {
+        if (cell.innerText === '') {
+            cell.innerText = currShape
+            clicks += 1
+            gameLoop()
+            if (!gameEnd) {
+                setTimeout(() => {
+                    aiPlay()
+                }, 500);
+            }
+        }
+    })
+})
+
+restartButon.addEventListener('click', () => {
+    resetGame()
+})
+
+const gameLoop = () => {
+    if (checkWin() !== null) {
+        endGame(checkWin())
+    } else if (clicks === 9) {
+        endGame()
+    }
+    changeShape()
+}
+
+const aiPlay = () => {
+    availableCell = availPlace()
+    if (availableCell.length !== 0) {
+        availableCell[Math.floor(Math.random() * availableCell.length)].innerText = currShape
+        clicks += 1
+        gameLoop()
+    }
+}
+
 const changeShape = () => {
     if (currShape === 'X') {
         currShape = 'O'
@@ -24,26 +63,23 @@ const changeShape = () => {
     }
 }
 
-const gameLoop = () => {
+const checkWin = () => {
+    let winner = null
     combinations.forEach((arr) => {
         if (cells[arr[0]].innerText === currShape && cells[arr[1]].innerText === currShape && cells[arr[2]].innerText === currShape) {
-            endGame(currShape)
+            winner = currShape
         }
-
     })
-    if (clicks === 9) {
-        endGame()
-    }
-    changeShape()
-
+    return winner
 }
 
 
 const endGame = (shape) => {
-    if (shape) { 
-        endScreen.firstElementChild.innerText = shape + '  WINS !!!' 
-    } else{
-        endScreen.firstElementChild.innerText = 'IT\'S A DRAW.'  
+    gameEnd = true
+    if (shape) {
+        endScreen.firstElementChild.innerText = shape + '  WINS !!!'
+    } else {
+        endScreen.firstElementChild.innerText = 'IT\'S A DRAW.'
     }
 
     endScreen.classList.add('show')
@@ -53,22 +89,16 @@ const endGame = (shape) => {
 const resetGame = () => {
     currShape = 'X'
     clicks = 0
+    gameEnd = false
     cells.forEach(cell => {
         cell.innerText = ''
     })
     endScreen.classList.remove('show')
 }
 
-cells.forEach((cell) => {
-    cell.addEventListener('click', () => {
-        if (cell.innerText === '') {
-            clicks += 1
-            cell.innerText = currShape
-            gameLoop()
-        }
+const availPlace = () => {
+    const available = cells.filter((cell) => {
+        return cell.innerText === ''
     })
-})
-
-restartButon.addEventListener('click', () => {
-    resetGame()
-})
+    return available
+}
