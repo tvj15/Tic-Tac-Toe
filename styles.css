@@ -7,8 +7,12 @@
 :root {
     --bg-color: black;
     --border-color: gold;
-    /* --bg-color: white;
-    --border-color: black; */
+    --end-screen-bg: rgba(20, 20, 20, 0.9);
+    --end-screen-color: gold;
+    --bg-color: white;
+    --border-color: black;
+    --end-screen-bg: rgba(20, 20, 20, 0.9);
+    --end-screen-color: white;
 }
 
 .board-grid {
@@ -71,13 +75,13 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(200, 200, 200, 0.9);
+    background-color: var(--end-screen-bg);
     justify-content: center;
     align-items: center;
 }
 
 .end-screen>h1 {
-    color: var(--border-color);
+    color: var(--end-screen-color);
     font-size: 100px;
     font-family: 'Raleway', sans-serif;
 }
