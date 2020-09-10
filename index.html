@@ -4,13 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link id="css" rel="stylesheet" href="styles.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@150;250&display=swap" rel="stylesheet">
 
     <title>TIC-TAC-TOE</title>
 </head>
 
 <body>
+    <div class="switch">
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"></div>
+            </label>
+        </div>
+    </div>
+
     <div class="board-grid">
         <div class="cell"></div>
         <div class="cell"></div>
@@ -28,4 +38,6 @@
     </div>
 </body>
 <script src="index.js"></script>
+<script src="theme.js"></script>
+
 </html>

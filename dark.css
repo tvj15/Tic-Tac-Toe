@@ -1,0 +1,8 @@
+@import "styles.css";
+
+:root{
+    --bg-color: black;
+    --border-color: #ffd700;
+    --end-screen-bg: rgba(20, 20, 20, 0.9);
+    --end-screen-color: gold;
+}
